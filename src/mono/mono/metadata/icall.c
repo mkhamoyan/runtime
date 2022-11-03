@@ -4095,8 +4095,8 @@ handle_parent:
 			(prop->set && ((prop->set->flags & METHOD_ATTRIBUTE_MEMBER_ACCESS_MASK) == METHOD_ATTRIBUTE_PUBLIC))) {
 			if (bflags & BFLAGS_Public)
 				match++;
-		} else if (property_accessor_nonpublic(prop->get, startklass == klass) ||
-				property_accessor_nonpublic(prop->set, startklass == klass)) {
+		} else if (property_accessor_nonpublic (prop->get, startklass == klass) ||
+				property_accessor_nonpublic (prop->set, startklass == klass)) {
 				match++;
 		}
 		if (!match)

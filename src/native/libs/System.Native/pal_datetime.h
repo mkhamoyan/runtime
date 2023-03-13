@@ -13,3 +13,6 @@ PALEXPORT char* SystemNative_GetDefaultTimeZone(void);
 #endif
 
 PALEXPORT const char* SystemNative_GetTimeZoneData(const char* name, int* length);
+
+PALEXPORT const char* SystemNative_GetICUData(const char* name, int* length);
+

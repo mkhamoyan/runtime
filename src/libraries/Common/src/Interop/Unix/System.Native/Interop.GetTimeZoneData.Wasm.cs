@@ -10,5 +10,8 @@ internal static partial class Interop
     {
         [LibraryImport(Interop.Libraries.SystemNative, EntryPoint = "SystemNative_GetTimeZoneData", StringMarshalling = StringMarshalling.Utf8, SetLastError = true)]
         internal static partial IntPtr GetTimeZoneData(string fileName, out int length);
+// who will call this
+        [LibraryImport(Interop.Libraries.SystemNative, EntryPoint = "SystemNative_GetICUData", StringMarshalling = StringMarshalling.Utf8, SetLastError = true)]
+        internal static partial IntPtr GetICUData(string fileName, out int length);
     }
 }

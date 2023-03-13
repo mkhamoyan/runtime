@@ -75,3 +75,18 @@ const char* SystemNative_GetTimeZoneData(const char* name, int* length)
     return NULL;
 #endif
 }
+
+//move to other folder
+const char* SystemNative_GetICUData(const char* name, int* length)
+{
+    assert(name != NULL);
+    assert(length != NULL);
+#if defined(TARGET_WASI))
+    return (const char*) mono_wasm_get_bundled_file(name, length);
+#else
+    assert_msg(false, "Not supported on this platform", 0);
+    (void)name; // unused
+    (void)length; // unused
+    return NULL;
+#endif
+}

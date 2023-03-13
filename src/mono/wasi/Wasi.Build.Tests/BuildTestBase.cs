@@ -366,6 +366,7 @@ namespace Wasm.Build.Tests
             });
 
             AssertFilesExist(bundleDir, new[] { "run-v8.sh" }, expectToExist: hasV8Script);
+            // remove this part
             AssertFilesExist(bundleDir, new[] { "icudt.dat" }, expectToExist: hasIcudt);
 
             string managedDir = Path.Combine(bundleDir, "managed");

@@ -228,6 +228,7 @@
     <PlatformManifestFileEntry Include="dotnet.d.ts" IsNative="true" />
     <PlatformManifestFileEntry Include="dotnet-legacy.d.ts" IsNative="true" />
     <PlatformManifestFileEntry Include="dotnet.wasm" IsNative="true" />
+    <PlatformManifestFileEntry Include="wasm-bundled-icu.a" IsNative="true" />
     <PlatformManifestFileEntry Include="icudt.dat" IsNative="true" />
     <PlatformManifestFileEntry Include="icudt_no_CJK.dat" IsNative="true" />
     <PlatformManifestFileEntry Include="icudt_CJK.dat" IsNative="true" />

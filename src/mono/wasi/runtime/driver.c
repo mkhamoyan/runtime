@@ -431,7 +431,7 @@ mono_wasm_load_runtime (const char *unused, int debug_level)
 	monovm_initialize (2, appctx_keys, appctx_values);
 
 	mini_parse_debug_option ("top-runtime-invoke-unhandled");
-
+//
 	mono_wasm_register_timezones_bundle();
 #ifdef BUNDLED_ASSEMBLIES
 	mono_wasm_register_assemblies_bundle();

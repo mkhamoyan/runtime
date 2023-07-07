@@ -92,7 +92,7 @@ Two things we are considering here:
    Instead, we prohibit these expansions and iterate through the string character by character opting for the original character if it would have been expanded.
 2. Properly handling surrogate pairs. Characters can be comprised of more than one code point
    (i.e. surrogate pairs like \uD801\uDC37). All code points for a character are needed to properly change case
-Returns 0 for success, non-zero on failure see ErrorCodes.
+Returns 0 for success, non-zero on failure see pal_errors.h for values.
 */
 int32_t GlobalizationNative_ChangeCaseNative(const uint16_t* localeName, int32_t lNameLength,
                                              const uint16_t* lpSrc, int32_t cwSrcLength, uint16_t* lpDst, int32_t cwDstLength, int32_t bToUpper)
@@ -142,7 +142,7 @@ Two things we are considering here:
    Instead, we prohibit these expansions and iterate through the string character by character opting for the original character if it would have been expanded.
 2. Properly handling surrogate pairs. Characters can be comprised of more than one code point
    (i.e. surrogate pairs like \uD801\uDC37). All code points for a character are needed to properly change case
-Returns 0 for success, non-zero on failure see ErrorCodes.
+Returns 0 for success, non-zero on failure see pal_errors.h for values.
 */
 int32_t GlobalizationNative_ChangeCaseInvariantNative(const uint16_t* lpSrc, int32_t cwSrcLength, uint16_t* lpDst, int32_t cwDstLength, int32_t bToUpper)
 {

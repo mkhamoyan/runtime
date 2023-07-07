@@ -9,9 +9,12 @@
 */
 typedef enum
 {
+    IndexNotFound = -1,
     Success = 0,
     UnknownError = 1,
     InsufficientBuffer = 2,
     OutOfMemory = 3,
-    InvalidCodePoint = 4
+    InvalidCodePoint = 4,
+    ComparisonOptionsNotFound = 6,
+    MixedCompositionNotFound = 7
 } ResultCode;

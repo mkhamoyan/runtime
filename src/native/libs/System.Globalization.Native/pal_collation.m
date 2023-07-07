@@ -2,8 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 #include <stdlib.h>
-#include "pal_locale_internal.h"
+#include "pal_icushim_internal.h"
 #include "pal_collation.h"
+#include "pal_errors.h"
 
 #import <Foundation/Foundation.h>
 
@@ -18,13 +19,6 @@ typedef enum
     IgnoreWidth = 16,
     StringSort = 536870912,
 } CompareOptions;
-
-typedef enum
-{
-    ERROR_INDEX_NOT_FOUND = -1,
-    ERROR_COMPARISON_OPTIONS_NOT_FOUND = -2,
-    ERROR_MIXED_COMPOSITION_NOT_FOUND = -3,
-} ErrorCodes;
 
 static NSLocale* GetCurrentLocale(const uint16_t* localeName, int32_t lNameLength)
 {
@@ -81,7 +75,7 @@ int32_t GlobalizationNative_CompareStringNative(const uint16_t* localeName, int3
     
     // in case mapping is not found
     if (options == 0)
-        return ERROR_COMPARISON_OPTIONS_NOT_FOUND;
+        return ComparisonOptionsNotFound;
 
     return [sourceStrPrecomposed compare:targetStrPrecomposed
                               options:options
@@ -121,13 +115,13 @@ Range GlobalizationNative_IndexOfNative(const uint16_t* localeName, int32_t lNam
                                         const uint16_t* lpSource, int32_t cwSourceLength, int32_t comparisonOptions, int32_t fromBeginning)
 {
     assert(cwTargetLength >= 0);
-    Range result = {ERROR_INDEX_NOT_FOUND, 0};
+    Range result = {IndexNotFound, 0};
     NSStringCompareOptions options = ConvertFromCompareOptionsToNSStringCompareOptions(comparisonOptions);
     
     // in case mapping is not found
     if (options == 0)
     {
-        result.location = ERROR_COMPARISON_OPTIONS_NOT_FOUND;
+        result.location = ComparisonOptionsNotFound;
         return result;
     }
     
@@ -161,8 +155,8 @@ Range GlobalizationNative_IndexOfNative(const uint16_t* localeName, int32_t lNam
     if (containsRange.location == NSNotFound)
         return result;
 
-    // in case search string is inside source string but we can't find the index return -3
-    result.location = ERROR_MIXED_COMPOSITION_NOT_FOUND;
+    // in case search string is inside source string but we can't find the index return MixedCompositionNotFound
+    result.location = MixedCompositionNotFound;
     // sourceString and searchString possibly have the same composition of characters
     rangeOfReceiverToSearch = NSMakeRange(0, sourceStrCleaned.length);
     NSRange nsRange = [sourceStrCleaned rangeOfString:searchStrCleaned
@@ -235,7 +229,7 @@ int32_t GlobalizationNative_StartsWithNative(const uint16_t* localeName, int32_t
     
     // in case mapping is not found
     if (options == 0)
-        return ERROR_COMPARISON_OPTIONS_NOT_FOUND;
+        return ComparisonOptionsNotFound;
 
     NSLocale *currentLocale = GetCurrentLocale(localeName, lNameLength);
     NSString *prefixString = [NSString stringWithCharacters: lpPrefix length: cwPrefixLength];
@@ -262,7 +256,7 @@ int32_t GlobalizationNative_EndsWithNative(const uint16_t* localeName, int32_t l
     
     // in case mapping is not found
     if (options == 0)
-        return ERROR_COMPARISON_OPTIONS_NOT_FOUND;
+        return ComparisonOptionsNotFound;
 
     NSLocale *currentLocale = GetCurrentLocale(localeName, lNameLength);
     NSString *suffixString = [NSString stringWithCharacters: lpSuffix length: cwSuffixLength];

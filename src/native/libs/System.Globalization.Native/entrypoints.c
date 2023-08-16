@@ -74,6 +74,8 @@ static const Entry s_globalizationNative[] =
     DllImportEntry(GlobalizationNative_IsNormalizedNative)
     DllImportEntry(GlobalizationNative_NormalizeStringNative)
     DllImportEntry(GlobalizationNative_StartsWithNative)
+    DllImportEntry(GlobalizationNative_ToAsciiNative)
+    DllImportEntry(GlobalizationNative_ToUnicodeNative)
 #endif
 };
 

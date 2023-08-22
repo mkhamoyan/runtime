@@ -18,3 +18,16 @@ PALEXPORT int32_t GlobalizationNative_ToUnicode(uint32_t flags,
                                                 int32_t cwSrcLength,
                                                 UChar* lpDst,
                                                 int32_t cwDstLength);
+#ifdef __APPLE__
+PALEXPORT int32_t GlobalizationNative_ToAsciiNative(uint32_t flags,
+                                              const uint16_t* lpSrc,
+                                              int32_t cwSrcLength,
+                                              uint16_t* lpDst,
+                                              int32_t cwDstLength);
+
+PALEXPORT int32_t GlobalizationNative_ToUnicodeNative(uint32_t flags,
+                                                const uint16_t* lpSrc,
+                                                int32_t cwSrcLength,
+                                                uint16_t* lpDst,
+                                                int32_t cwDstLength);
+#endif

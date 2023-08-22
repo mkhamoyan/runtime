@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics;
-//
+
 namespace System.Globalization
 {
     public sealed partial class IdnMapping
@@ -24,7 +24,14 @@ namespace System.Globalization
             if (estimatedLength < StackallocThreshold)
             {
                 char* outputStack = stackalloc char[estimatedLength];
-                actualLength = Interop.Globalization.ToAscii(flags, unicode, count, outputStack, estimatedLength);
+#if TARGET_MACCATALYST || TARGET_IOS || TARGET_TVOS
+                    if (GlobalizationMode.Hybrid)
+                         actualLength = Interop.Globalization.ToAsciiNative(flags, unicode, count, outputStack, estimatedLength);
+                    else
+                         actualLength = Interop.Globalization.ToAscii(flags, unicode, count, outputStack, estimatedLength);
+#else
+                         actualLength = Interop.Globalization.ToAscii(flags, unicode, count, outputStack, estimatedLength);
+#endif
                 if (actualLength > 0 && actualLength <= estimatedLength)
                 {
                     return GetStringForOutput(unicodeString, unicode, count, outputStack, actualLength);

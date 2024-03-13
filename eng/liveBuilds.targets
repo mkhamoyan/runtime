@@ -180,6 +180,8 @@
         IsNative="" />
       <ExcludeNativeLibrariesRuntimeFiles Condition="'$(IncludeOOBLibraries)' != 'true'"
                                           Include="$(LibrariesNativeArtifactsPath)libSystem.IO.Ports.Native.*" />
+      <ExcludeNativeLibrariesRuntimeFiles Condition="'$(TargetsMacCatalyst)' == 'true' or '$(TargetsiOS)' == 'true' or '$(TargetstvOS)' == 'true'"
+                                          Include="$(LibrariesNativeArtifactsPath)*.dat;$(LibrariesNativeArtifactsPath)*icudata.a;$(LibrariesNativeArtifactsPath)*icui18n.a;$(LibrariesNativeArtifactsPath)*icuuc.a" />
       <LibrariesRuntimeFiles Include="
         $(LibrariesNativeArtifactsPath)*.dat;
         $(LibrariesNativeArtifactsPath)*.dll;

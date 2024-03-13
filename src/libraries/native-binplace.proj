@@ -12,11 +12,14 @@
 
   <!-- Ordering matters! Overriding GetBinPlaceItems and Build targets after the Sdk import. -->
   <Target Name="GetBinPlaceItems">
+    <ExcludeNativeLibrariesRuntimeFiles Condition="'$(TargetsMacCatalyst)' == 'true' or '$(TargetsiOS)' == 'true' or '$(TargetstvOS)' == 'true'"
+                                          Include="$(NativeBinDir)*.dat;$(NativeBinDir)*icudata.a;$(NativeBinDir)*icui18n.a;$(NativeBinDir)*icuuc.a" />
+
     <ItemGroup>
       <BinPlaceItem Include="$(NativeBinDir)*.dll" />
       <BinPlaceItem Include="$(NativeBinDir)*.pdb" />
       <BinPlaceItem Include="$(NativeBinDir)*.lib" />
-      <BinPlaceItem Include="$(NativeBinDir)*.a" />
+      <BinPlaceItem Include="$(NativeBinDir)*.a" Exclude="@(ExcludeNativeLibrariesRuntimeFiles)" />
       <BinPlaceItem Include="$(NativeBinDir)*.bc" />
       <BinPlaceItem Include="$(NativeBinDir)*.so" />
       <BinPlaceItem Include="$(NativeBinDir)*.dbg" />
@@ -24,7 +27,7 @@
       <BinPlaceItem Include="$(NativeBinDir)*.dwarf" />
       <BinPlaceItem Include="$(NativeBinDir)*.dex" />
       <BinPlaceItem Include="$(NativeBinDir)*.jar" />
-      <BinPlaceItem Include="$(NativeBinDir)*.dat" />
+      <BinPlaceItem Include="$(NativeBinDir)*.dat" Exclude="@(ExcludeNativeLibrariesRuntimeFiles)" />
       <FileWrites Include="@(BinPlaceItem)" />
     </ItemGroup>
   </Target>
